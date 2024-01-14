@@ -1,3 +1,47 @@
-[gd_scene format=3 uid="uid://ds2dirteood18"]
+[gd_scene load_steps=3 format=3 uid="uid://ds2dirteood18"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_r2h2q"]
+[ext_resource type="PackedScene" uid="uid://drfan8xgnsglq" path="res://block.tscn" id="1_s8mf6"]
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_r2h2q")
+
+[node name="Board" type="Node2D" parent="."]
+position = Vector2(280, 32)
+
+[node name="Block1" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(104, 104)
+
+[node name="Block2" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(296, 104)
+
+[node name="Block3" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(488, 104)
+
+[node name="Block4" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(104, 292)
+
+[node name="Block5" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(296, 292)
+
+[node name="Block6" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(488, 292)
+
+[node name="Block7" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(104, 484)
+
+[node name="Block8" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(296, 484)
+
+[node name="Block9" parent="Board" instance=ExtResource("1_s8mf6")]
+position = Vector2(488, 484)
+
+[connection signal="OnBlockClick" from="Board/Block1" to="." method="_on_block_click"]
+[connection signal="OnBlockClick" from="Board/Block2" to="." method="_on_block_click"]
+[connection signal="OnBlockClick" from="Board/Block3" to="." method="_on_block_click"]
+[connection signal="OnBlockClick" from="Board/Block4" to="." method="_on_block_click"]
+[connection signal="OnBlockClick" from="Board/Block5" to="." method="_on_block_click"]
+[connection signal="OnBlockClick" from="Board/Block6" to="." method="_on_block_click"]
+[connection signal="OnBlockClick" from="Board/Block7" to="." method="_on_block_click"]
+[connection signal="OnBlockClick" from="Board/Block8" to="." method="_on_block_click"]
+[connection signal="OnBlockClick" from="Board/Block9" to="." method="_on_block_click"]
