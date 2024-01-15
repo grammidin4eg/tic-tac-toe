@@ -12,7 +12,7 @@ func _reverse_player_type():
 
 func _on_block_click(curBlock):
 	# print(curBlock)
-	if curBlock.is_empty():
+	if currentPlayer != EPlayerType.EMPTY and curBlock.is_empty():
 		curBlock.set_value(currentPlayer)
 		_reverse_player_type()
 		_check_win()
@@ -28,8 +28,8 @@ func _check_win() -> bool:
 		[0, 4, 8],
 		[2, 4 ,6]
 	]
-	for i in len(checkArray):
-		var result = _check_line(checkArray[i])
+	for row in checkArray:
+		var result = _check_line(row)
 		if result != EPlayerType.EMPTY:
 			print("!!! win: ", result)
 			_game_over(result)
@@ -37,8 +37,8 @@ func _check_win() -> bool:
 
 func _check_line(row: Array) -> EPlayerType:
 	var row_sum = 0
-	for i in len(row):
-		row_sum += _get_block_value(row[i])
+	for index in row:
+		row_sum += _get_block_value(index)
 	if row_sum == 3:
 		return EPlayerType.CROSS
 	elif row_sum == -3:
@@ -49,10 +49,11 @@ func _get_block_value(index: int) -> EPlayerType:
 	return blocks[index].get_value()
 
 func _game_over(result: EPlayerType):
-	get_tree().paused = true
-	pass
+	$GameOverPanel.visible = true
+	currentPlayer = EPlayerType.EMPTY
 
 func _new_game():
-	currentPlayer = EPlayerType.CROSS
-	get_tree().paused = false
-	pass
+	for block in blocks:
+		block.set_value(EPlayerType.EMPTY)
+	currentPlayer = EPlayerType.CROSS	
+	$GameOverPanel.visible = false

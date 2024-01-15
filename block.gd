@@ -12,11 +12,15 @@ func _input(event):
 			OnBlockClick.emit(self)
 
 func set_value(new_value: EPlayerType):
-	const CROSS_IMG = preload("res://images/tac.png")
-	const ZERO_IMG = preload("res://images/toe.png")
-	var newTexture = CROSS_IMG if new_value == EPlayerType.CROSS else ZERO_IMG
-	texture = newTexture
 	value = new_value
+	if new_value != EPlayerType.EMPTY:
+		const CROSS_IMG = preload("res://images/tac.png")
+		const ZERO_IMG = preload("res://images/toe.png")
+		var newTexture = CROSS_IMG if new_value == EPlayerType.CROSS else ZERO_IMG
+		texture = newTexture
+	else:
+		const EMPTY_IMG = preload("res://images/empty.png")
+		texture = EMPTY_IMG
 	
 func get_value():
 	return value

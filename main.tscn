@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds2dirteood18"]
+[gd_scene load_steps=4 format=3 uid="uid://ds2dirteood18"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_r2h2q"]
 [ext_resource type="PackedScene" uid="uid://drfan8xgnsglq" path="res://block.tscn" id="1_s8mf6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wvr2"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="main" type="Node2D" node_paths=PackedStringArray("blocks")]
 script = ExtResource("1_r2h2q")
@@ -37,6 +40,44 @@ position = Vector2(296, 484)
 [node name="Block9" parent="Board" instance=ExtResource("1_s8mf6")]
 position = Vector2(488, 484)
 
+[node name="GameOverPanel" type="Panel" parent="."]
+offset_left = 197.0
+offset_top = 110.0
+offset_right = 955.0
+offset_bottom = 542.0
+
+[node name="Label" type="Label" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -90.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.615686, 0, 0.65098, 1)
+theme_override_font_sizes/font_size = 80
+text = "Игра окончена"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -161.0
+offset_right = 135.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wvr2")
+text = "Играть снова"
+
 [connection signal="OnBlockClick" from="Board/Block1" to="." method="_on_block_click"]
 [connection signal="OnBlockClick" from="Board/Block2" to="." method="_on_block_click"]
 [connection signal="OnBlockClick" from="Board/Block3" to="." method="_on_block_click"]
@@ -46,3 +87,4 @@ position = Vector2(488, 484)
 [connection signal="OnBlockClick" from="Board/Block7" to="." method="_on_block_click"]
 [connection signal="OnBlockClick" from="Board/Block8" to="." method="_on_block_click"]
 [connection signal="OnBlockClick" from="Board/Block9" to="." method="_on_block_click"]
+[connection signal="pressed" from="GameOverPanel/Button" to="." method="_new_game"]
