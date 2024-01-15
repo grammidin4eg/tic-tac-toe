@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ds2dirteood18"]
+[gd_scene load_steps=5 format=3 uid="uid://ds2dirteood18"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_r2h2q"]
 [ext_resource type="PackedScene" uid="uid://drfan8xgnsglq" path="res://block.tscn" id="1_s8mf6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmf32"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wvr2"]
 bg_color = Color(0, 0, 0, 1)
@@ -11,7 +13,7 @@ script = ExtResource("1_r2h2q")
 blocks = [NodePath("Board/Block1"), NodePath("Board/Block2"), NodePath("Board/Block3"), NodePath("Board/Block4"), NodePath("Board/Block5"), NodePath("Board/Block6"), NodePath("Board/Block7"), NodePath("Board/Block8"), NodePath("Board/Block9")]
 
 [node name="Board" type="Node2D" parent="."]
-position = Vector2(280, 32)
+position = Vector2(248, 32)
 
 [node name="Block1" parent="Board" instance=ExtResource("1_s8mf6")]
 position = Vector2(104, 104)
@@ -40,11 +42,15 @@ position = Vector2(296, 484)
 [node name="Block9" parent="Board" instance=ExtResource("1_s8mf6")]
 position = Vector2(488, 484)
 
+[node name="CurrentBlock" parent="." instance=ExtResource("1_s8mf6")]
+position = Vector2(976, 328)
+
 [node name="GameOverPanel" type="Panel" parent="."]
-offset_left = 197.0
-offset_top = 110.0
-offset_right = 955.0
-offset_bottom = 542.0
+offset_left = 176.0
+offset_top = 112.0
+offset_right = 934.0
+offset_bottom = 544.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bmf32")
 
 [node name="Label" type="Label" parent="GameOverPanel"]
 layout_mode = 1
@@ -52,8 +58,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -90.0
-offset_bottom = -7.0
+offset_top = -144.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.615686, 0, 0.65098, 1)
@@ -68,15 +74,31 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -142.0
-offset_top = -161.0
-offset_right = 135.0
-offset_bottom = -98.0
+offset_left = -139.0
+offset_top = -112.0
+offset_right = 138.0
+offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_4wvr2")
 text = "Играть снова"
+
+[node name="Winner" type="Label" parent="GameOverPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.627451, 0.113725, 0.721569, 1)
+theme_override_font_sizes/font_size = 60
+text = "Победитель: "
+horizontal_alignment = 1
 
 [connection signal="OnBlockClick" from="Board/Block1" to="." method="_on_block_click"]
 [connection signal="OnBlockClick" from="Board/Block2" to="." method="_on_block_click"]

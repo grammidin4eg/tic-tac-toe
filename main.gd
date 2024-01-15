@@ -8,7 +8,8 @@ func _ready():
 	_new_game()
 
 func _reverse_player_type():
-	currentPlayer = EPlayerType.CROSS if currentPlayer == EPlayerType.ZERO else EPlayerType.ZERO
+	_set_current_player(EPlayerType.CROSS if currentPlayer == EPlayerType.ZERO else EPlayerType.ZERO)
+	
 
 func _on_block_click(curBlock):
 	# print(curBlock)
@@ -49,11 +50,19 @@ func _get_block_value(index: int) -> EPlayerType:
 	return blocks[index].get_value()
 
 func _game_over(result: EPlayerType):
+	var winner = 'X' if result == EPlayerType.CROSS else 'O'
+	%Winner.text = 'Победитель: ' + winner
 	$GameOverPanel.visible = true
-	currentPlayer = EPlayerType.EMPTY
+	_set_current_player(EPlayerType.EMPTY)
 
 func _new_game():
 	for block in blocks:
 		block.set_value(EPlayerType.EMPTY)
-	currentPlayer = EPlayerType.CROSS	
+	_set_current_player(EPlayerType.CROSS)
 	$GameOverPanel.visible = false
+
+func _set_current_player(newPlayer: EPlayerType):
+	currentPlayer = newPlayer
+	$CurrentBlock.set_value(currentPlayer)
+
+# todo: проверка на ничью
